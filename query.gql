@@ -1,2 +1,28 @@
 query {
+	queryDevice(filter: {storageSize: { in: [_128_GB] }}) @cascade {
+		id
+		name
+		sku
+		price
+		cost
+		status
+		color storageSize grade lockStatus carrier 
+		categories {
+			name
+		}
+		manufacturer(filter: { name: { in: ["Apple"] } }) {
+			name
+		}
+		brand() {
+			name
+		}
+		model() {
+			name
+		}
+	}
+	aggregateProduct {
+		count
+		priceMax
+		priceMin
+	}
 }

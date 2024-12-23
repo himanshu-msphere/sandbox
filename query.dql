@@ -1,4 +1,27 @@
 {
-	q() {
-	}
+  var(func: type(Product)) @cascade {
+    prodids as uid
+    productcost as Product.cost
+    prodsku as Product.sku
+    manufacturername as Product.manufacturer @filter(eq(Manufacturer.name,"Apple"))
+    brandname as Product.brand
+    modelname as Product.model
+    catname as Product.categories @filter(eq(Category.name,"Device"))
+  }
+  prodfilter(func:uid(prodids)) @normalize @cascade {
+    brand: Product.brand @filter(uid(brandname)) {
+      brand: Brand.name
+    }
+    category: Product.categories @filter(uid(catname)) {
+      category: Category.name
+    }
+    cost : val(productcost)
+    model: Product.model @filter(uid(modelname)) {
+      model: Model.name
+    }
+    manufacturer: Product.manufacturer @filter(uid(manufacturername)) {
+      manufacturer: Manufacturer.name
+    }
+    sku: val(prodsku)
+  }
 }

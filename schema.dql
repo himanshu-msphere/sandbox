@@ -1,0 +1,337 @@
+<BatteryReplacementParts.batteryMah>: float @index(float) .
+<BatteryReplacementParts.batteryVolt>: float @index(float) .
+<BatteryReplacementParts.batteryWeight>: float @index(float) .
+<BatteryReplacementParts.batterymah>: float @index(float) .
+<BatteryReplacementParts.batteryvolt>: float @index(float) .
+<BatteryReplacementParts.batteryweight>: float @index(float) .
+<BatteryReplacementParts.description>: string @index(term) .
+<Brand.attrValues>: string .
+<Brand.categories>: [uid] .
+<Brand.code>: string .
+<Brand.createdAt>: datetime .
+<Brand.description>: string .
+<Brand.image>: string .
+<Brand.isEnabled>: bool @index(bool) .
+<Brand.manufacturer>: uid .
+<Brand.models>: [uid] .
+<Brand.name>: string @index(hash, trigram) @upsert .
+<Brand.position>: int .
+<Brand.products>: [uid] .
+<CableAccessories.accessoriesTip>: string @index(hash) .
+<CableAccessories.cablesFeatures>: string @index(hash) .
+<CableAccessories.condition>: string @index(hash) .
+<CableAccessories.connection>: string @index(hash) .
+<CableAccessories.length>: string @index(hash) .
+<CaseAccessories.casesFeatures>: string @index(hash) .
+<CaseAccessories.condition>: string @index(hash) .
+<Category.brands>: [uid] .
+<Category.code>: string .
+<Category.createdAt>: datetime .
+<Category.description>: string .
+<Category.image>: string .
+<Category.isEnabled>: bool @index(bool) .
+<Category.manufacturers>: [uid] .
+<Category.metaDescription>: string .
+<Category.metaKeywords>: string .
+<Category.metaTitle>: string .
+<Category.models>: [uid] .
+<Category.name>: string @index(hash, trigram) @upsert .
+<Category.parent>: uid .
+<Category.position>: int .
+<Category.products>: [uid] .
+<Category.subCategories>: [uid] .
+<Category.updatedAt>: datetime .
+<Category.urlKey>: string @index(term) .
+<Device.carrier>: string @index(hash) .
+<Device.color>: string @index(hash) .
+<Device.grade>: string @index(hash) .
+<Device.lockStatus>: string @index(hash) .
+<Device.storageSize>: string @index(hash) .
+<DisplayReplacementParts.color>: string @index(hash) .
+<DisplayReplacementParts.description>: string @index(term) .
+<DisplayReplacementParts.refreshRate>: string @index(hash) .
+<DisplayReplacementParts.responseTime>: string @index(term) .
+<DisplayReplacementParts.size>: string @index(hash) .
+<DisplayReplacementParts.technology>: string @index(hash) .
+<Manufacturer.attrValues>: string .
+<Manufacturer.brands>: [uid] .
+<Manufacturer.categories>: [uid] .
+<Manufacturer.code>: string .
+<Manufacturer.createdAt>: datetime .
+<Manufacturer.description>: string .
+<Manufacturer.image>: string .
+<Manufacturer.isEnabled>: bool @index(bool) .
+<Manufacturer.name>: string @index(hash, trigram) @upsert .
+<Manufacturer.position>: int .
+<Manufacturer.products>: [uid] .
+<Model.attrValues>: string .
+<Model.brand>: uid .
+<Model.categories>: [uid] .
+<Model.code>: string .
+<Model.createdAt>: datetime .
+<Model.description>: string .
+<Model.image>: string .
+<Model.isEnabled>: bool @index(bool) .
+<Model.manufacturer>: uid .
+<Model.name>: string @index(hash, trigram) @upsert .
+<Model.position>: int .
+<Model.products>: [uid] .
+<Product.brand>: uid .
+<Product.categories>: [uid] .
+<Product.compatibleModel>: [uid] .
+<Product.cost>: float @index(float) .
+<Product.createdAt>: datetime .
+<Product.image>: string .
+<Product.manufacturer>: uid .
+<Product.mediaGallery>: string .
+<Product.metaDescription>: string .
+<Product.metaKeywords>: string .
+<Product.metaTitle>: string .
+<Product.model>: uid .
+<Product.name>: string @index(hash, trigram) @upsert .
+<Product.parent>: uid .
+<Product.price>: float @index(float) .
+<Product.sku>: string @index(hash, trigram) @upsert .
+<Product.smallImage>: string .
+<Product.status>: bool @index(bool) .
+<Product.updatedAt>: datetime .
+<Product.urlKey>: string @index(term) .
+<ReplacementParts.description>: string @index(term) .
+type <BatteryReplacementParts> {
+  Product.name
+  Product.sku
+  Product.price
+  Product.cost
+  Product.categories
+  Product.manufacturer
+  Product.brand
+  Product.model
+  Product.status
+  Product.image
+  Product.smallImage
+  Product.mediaGallery
+  Product.parent
+  Product.metaTitle
+  Product.metaDescription
+  Product.metaKeywords
+  Product.urlKey
+  Product.createdAt
+  Product.updatedAt
+  Product.compatibleModel
+  BatteryReplacementParts.description
+  BatteryReplacementParts.batteryvolt
+  BatteryReplacementParts.batteryweight
+  BatteryReplacementParts.batterymah
+}
+type <Brand> {
+  Brand.name
+  Brand.image
+  Brand.code
+  Brand.description
+  Brand.isEnabled
+  Brand.products
+  Brand.manufacturer
+  Brand.models
+  Brand.categories
+  Brand.position
+  Brand.createdAt
+  Brand.attrValues
+}
+type <CableAccessories> {
+  Product.name
+  Product.sku
+  Product.price
+  Product.cost
+  Product.categories
+  Product.manufacturer
+  Product.brand
+  Product.model
+  Product.status
+  Product.image
+  Product.smallImage
+  Product.mediaGallery
+  Product.parent
+  Product.metaTitle
+  Product.metaDescription
+  Product.metaKeywords
+  Product.urlKey
+  Product.createdAt
+  Product.updatedAt
+  Product.compatibleModel
+  CableAccessories.accessoriesTip
+  CableAccessories.connection
+  CableAccessories.length
+  CableAccessories.condition
+  CableAccessories.cablesFeatures
+}
+type <CaseAccessories> {
+  Product.name
+  Product.sku
+  Product.price
+  Product.cost
+  Product.categories
+  Product.manufacturer
+  Product.brand
+  Product.model
+  Product.status
+  Product.image
+  Product.smallImage
+  Product.mediaGallery
+  Product.parent
+  Product.metaTitle
+  Product.metaDescription
+  Product.metaKeywords
+  Product.urlKey
+  Product.createdAt
+  Product.updatedAt
+  Product.compatibleModel
+  CaseAccessories.condition
+  CaseAccessories.casesFeatures
+}
+type <Category> {
+  Category.name
+  Category.image
+  Category.code
+  Category.description
+  Category.isEnabled
+  Category.position
+  Category.metaTitle
+  Category.metaDescription
+  Category.metaKeywords
+  Category.urlKey
+  Category.manufacturers
+  Category.brands
+  Category.models
+  Category.products
+  Category.parent
+  Category.subCategories
+  Category.createdAt
+  Category.updatedAt
+}
+type <Device> {
+  Product.name
+  Product.sku
+  Product.price
+  Product.cost
+  Product.categories
+  Product.manufacturer
+  Product.brand
+  Product.model
+  Product.status
+  Product.image
+  Product.smallImage
+  Product.mediaGallery
+  Product.parent
+  Product.metaTitle
+  Product.metaDescription
+  Product.metaKeywords
+  Product.urlKey
+  Product.createdAt
+  Product.updatedAt
+  Product.compatibleModel
+  Device.color
+  Device.storageSize
+  Device.grade
+  Device.lockStatus
+  Device.carrier
+}
+type <DisplayReplacementParts> {
+  Product.name
+  Product.sku
+  Product.price
+  Product.cost
+  Product.categories
+  Product.manufacturer
+  Product.brand
+  Product.model
+  Product.status
+  Product.image
+  Product.smallImage
+  Product.mediaGallery
+  Product.parent
+  Product.metaTitle
+  Product.metaDescription
+  Product.metaKeywords
+  Product.urlKey
+  Product.createdAt
+  Product.updatedAt
+  Product.compatibleModel
+  DisplayReplacementParts.description
+  DisplayReplacementParts.refreshRate
+  DisplayReplacementParts.color
+  DisplayReplacementParts.technology
+  DisplayReplacementParts.size
+  DisplayReplacementParts.responseTime
+}
+type <Manufacturer> {
+  Manufacturer.name
+  Manufacturer.image
+  Manufacturer.code
+  Manufacturer.description
+  Manufacturer.isEnabled
+  Manufacturer.products
+  Manufacturer.categories
+  Manufacturer.brands
+  Manufacturer.position
+  Manufacturer.createdAt
+  Manufacturer.attrValues
+}
+type <Model> {
+  Model.name
+  Model.image
+  Model.code
+  Model.description
+  Model.isEnabled
+  Model.products
+  Model.manufacturer
+  Model.categories
+  Model.brand
+  Model.position
+  Model.createdAt
+  Model.attrValues
+}
+type <Product> {
+  Product.name
+  Product.sku
+  Product.price
+  Product.cost
+  Product.categories
+  Product.manufacturer
+  Product.brand
+  Product.model
+  Product.status
+  Product.image
+  Product.smallImage
+  Product.mediaGallery
+  Product.parent
+  Product.metaTitle
+  Product.metaDescription
+  Product.metaKeywords
+  Product.urlKey
+  Product.createdAt
+  Product.updatedAt
+  Product.compatibleModel
+}
+type <ReplacementParts> {
+  Product.name
+  Product.sku
+  Product.price
+  Product.cost
+  Product.categories
+  Product.manufacturer
+  Product.brand
+  Product.model
+  Product.status
+  Product.image
+  Product.smallImage
+  Product.mediaGallery
+  Product.parent
+  Product.metaTitle
+  Product.metaDescription
+  Product.metaKeywords
+  Product.urlKey
+  Product.createdAt
+  Product.updatedAt
+  Product.compatibleModel
+  ReplacementParts.description
+}

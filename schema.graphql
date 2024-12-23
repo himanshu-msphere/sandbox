@@ -1,0 +1,255 @@
+type Category {
+  id: ID!
+  name: String! @id @search(by: [regexp])
+  image: String
+  code: String!
+  description: String
+  isEnabled: Boolean @search
+  position: Int @default(add:{value: 0})
+  metaTitle: String
+  metaDescription: String
+  metaKeywords: String
+  urlKey: String @search
+  manufacturers: [Manufacturer] @hasInverse(field: categories)
+  brands: [Brand] @hasInverse(field: categories)
+  models: [Model] @hasInverse(field: categories)
+  products: [Product!] @hasInverse(field: categories)
+  parent: Category
+  subCategories: [Category] @hasInverse(field: parent)
+  createdAt: DateTime @default(add: {value: "$now"})
+  updatedAt: DateTime @default(update: {value: "$now"})
+}
+
+type Manufacturer {
+  name: String! @id @search(by: [regexp])
+  image: String
+  code: String!
+  description: String
+  isEnabled: Boolean @search
+  products: [Product] @hasInverse(field: manufacturer)
+  categories: [Category] @hasInverse(field: manufacturers)
+  brands: [Brand] @hasInverse(field: manufacturer)
+  position: Int @default(add:{value: 0})
+  createdAt: DateTime @default(add: {value: "$now"})
+  attrValues: String
+}
+
+type Brand {
+  name: String! @id @search(by: [regexp])
+  image: String
+  code: String!
+  description: String
+  isEnabled: Boolean @search
+  products: [Product] @hasInverse(field: brand)
+  manufacturer: Manufacturer @hasInverse(field: brands)
+  models: [Model] @hasInverse(field: brand)
+  categories: [Category] @hasInverse(field: brands)
+  position: Int @default(add:{value: 0})
+  createdAt: DateTime @default(add: {value: "$now"})
+  attrValues: String
+}
+
+type Model {
+  name: String! @id @search(by: [regexp])
+  image: String
+  code: String!
+  description: String
+  isEnabled: Boolean @search
+  products: [Product] @hasInverse(field: model)
+  manufacturer: Manufacturer
+  categories: [Category] @hasInverse(field: models)
+  brand: Brand @hasInverse(field: models)
+  position: Int @default(add:{value: 0})
+  createdAt: DateTime @default(add: {value: "$now"})
+  attrValues: String
+}
+
+interface Product {
+  id: ID!
+  name: String! @id @search(by: [regexp])
+  sku: String @id @search(by: [regexp])
+  price: Float! @search @default(add: {value: 0.00})
+  cost: Float @search @default(add: {value: 0.00})
+  categories: [Category!] @hasInverse(field: products)
+  manufacturer: [Manufacturer]
+  brand: [Brand]
+  model: [Model]
+  status: Boolean @search
+  image: String
+  smallImage: String
+  thumbnail: String
+  mediaGallery: String
+  parent: Product
+  metaTitle: String
+  metaDescription: String
+  metaKeywords: String
+  urlKey: String @search
+  createdAt: DateTime @default(add: {value: "$now"})
+  updatedAt: DateTime @default(update: {value: "$now"})
+}
+
+type ReplacementParts implements Product {
+description: String @search
+}
+
+type DisplayReplacementParts implements Product {
+description: String @search
+refreshRate: RefreshRate @search
+color: Color @search
+technology: Technology! @search
+size: Size! @search
+responseTime: String @search
+}
+enum RefreshRate {
+"60Hz"
+_60HZ
+"1Hz"
+_1HZ
+"120Hz"
+_120HZ
+}
+enum Color {
+"Black"
+_BLACK
+"White"
+_WHITE
+"Marin Light"
+_MARINLIGHT
+"Blue"
+_BLUE
+"Yellow"
+_YELLOW
+}
+enum Technology {
+"LCD"
+_LCD
+"OLED"
+_OLED
+"QLED"
+_QLED
+}
+enum Size {
+"4 inches"
+_4INCHES
+"6 inches"
+_6INCHES
+"5 inches"
+_5INCHES
+}
+type BatteryReplacementParts implements Product {
+description: String @search
+batteryvolt: Float @search
+batteryweight: Float @search
+batterymah: Float @search
+}
+type CaseAccessories implements Product {
+condition: Condition! @search
+casesFeatures: CasesFeatures @search
+}
+enum Condition {
+"New"
+_NEW
+"Old"
+_OLD
+}
+enum CasesFeatures {
+"Security Grip"
+_SECURITYGRIP
+"Magnet Compatible"
+_MAGNETCOMPATIBLE
+"Dual Layer"
+_DUALLAYER
+"Kickstand"
+_KICKSTAND
+"Strap"
+_STRAP
+}
+type CableAccessories implements Product {
+accessoriesTip: AccessoriesTip! @search
+connection: Connection! @search
+length: Length @search
+condition: Condition @search
+cablesFeatures: CablesFeatures @search
+}
+enum AccessoriesTip {
+"Wireless"
+_WIRELESS
+"USB-C"
+_USB_C
+"Micro USB"
+_MICROUSB
+"Lightning"
+_LIGHTNING
+"Apple Watch"
+_APPLEWATCH
+"MagSafe"
+_MAGSAFE
+}
+enum Length {
+"1m"
+_1M
+"3m"
+_3M
+}
+enum Connection {
+"USB-A"
+_USB_A
+"USB-C"
+_USB_C
+}
+enum CablesFeatures {
+"Power Metering"
+_POWERMETERING
+"MFI"
+_MFI
+"Magnetic Tip"
+_MAGNETICTIP
+}
+
+type Device implements Product {
+color: Color @search
+storageSize: StorageSize @search
+grade: Grade @search
+lockStatus: LockStatus @search
+carrier: Carrier @search
+}
+enum StorageSize {
+"16 GB"
+_16_GB
+"32 GB"
+_32_GB
+"64 GB"
+_64_GB
+"128 GB"
+_128_GB
+"264 GB"
+_264_GB
+}
+enum Grade {
+"Grade A"
+_GRADE_A
+"Grade B"
+_GRADE_B
+"Grade C"
+_GRADE_C
+"Grade D"
+_GRADE_D
+"Brand New"
+_BRAND_NEW
+}
+enum LockStatus {
+"Locked"
+_LOCKED
+"Unlocked"
+_UNLOCKED
+}
+enum Carrier {
+"AT&T"
+_AT_T
+"Sprint"
+_SPRINT
+"Verizon"
+_VERIZON
+"T-Mobile"
+_T_MOBILE
+}
